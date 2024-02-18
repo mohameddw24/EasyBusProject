@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using EasyBusProject.ViewModels;
 
 namespace EasyBus.Models
 {
@@ -28,6 +29,8 @@ namespace EasyBus.Models
                 .HasForeignKey(t => t.DropOffID)
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
         }
+        public DbSet<EasyBusProject.ViewModels.RegisterUserVM> RegisterUserVM { get; set; } = default!;
+        public DbSet<EasyBusProject.ViewModels.LoginUserVM> LoginUserVM { get; set; } = default!;
 
 
     }

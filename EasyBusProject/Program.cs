@@ -1,5 +1,7 @@
 using EasyBus.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace EasyBusProject
 {
@@ -14,6 +16,13 @@ namespace EasyBusProject
             var connectionString = builder.Configuration.GetConnectionString("EasyBusConn") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<MainDbContext>(options =>
                options.UseSqlServer(connectionString));
+
+            builder.Services.AddIdentity<User, IdentityRole<int>>(options => {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+            })
+            .AddEntityFrameworkStores<MainDbContext>();
 
             var app = builder.Build();
 
