@@ -1,0 +1,57 @@
+﻿@using EasyBus.Models
+@model EasyBus.Models.Bus
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Bus</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Seats" class="control-label"></label>
+                <select asp-for="Seats" class="form-control" name="Seats">
+                    @foreach (var seat in Enum.GetValues(typeof(SeatCount)))
+                    {
+                        <option value="@((int)seat)">@seat</option>
+                    }
+                </select>
+                @* <select asp-for="Seats" asp-items="@Html.GetEnumSelectList<SeatCount>()" class="form-control" /> *@
+                <span asp-validation-for="Seats" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <select asp-for="Category" class="form-control" name="Category">
+                    @foreach (var category in Enum.GetValues(typeof(Category)))
+                    {
+                        <option value="@((int)category)">@category</option>
+                    }
+                </select>
+                @* <select asp-for="Category" asp-items="@Html.GetEnumSelectList<Category>()" /> *@
+
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
