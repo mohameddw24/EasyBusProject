@@ -15,14 +15,14 @@ namespace EasyBus.Models
 
         [Required]
         [EnumDataType(typeof(WeekDays))]
-        public ICollection<WeekDays>? AvailableDays { get; set; }
+        public List<WeekDays>? AvailableDays { get; set; }
 
         [ForeignKey("Bus")]
         public int BusId { get; set; }
         public Bus Bus { get; set; } = null!;
 
         [Required]
-        public DateTime Time { get; set; }
+        public TimeOnly Time { get; set; }
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Price must be a positive integer.")]
