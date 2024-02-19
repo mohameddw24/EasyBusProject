@@ -1,8 +1,249 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Home Page";
+    var stations = ViewBag.Stations;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    .bg {
+        background-image: url('images/333.jpg');
+        background-size: cover;
+        height: 350px;
+    }
+    select {
+        width: 200px !important;
+        display: inline !important;
+    }
+    .icon {
+        display: inline !important;
+        margin-left: 10px;
+    }
+    .date {
+        height: 40px;
+        border-radius: 5px;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: black;
+        background-color: #FEC91B;
+        box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+    }
+
+    .accordion-button:focus {
+        z-index: 3;
+        border-color: lightgray;
+        outline: 0;
+        box-shadow: none;
+    }
+
+
+</style>
+
+    <div class="row bg justify-content-center align-items-center text-center">
+        <h2 style="color:white;font-weight:bolder;margin-top:90px">Book Your Ticket</h2>
+        <br />
+        <br />
+
+        <form action="/buses/index" method="post" class="mb-5">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>From</option>
+                @foreach (var item in stations)
+                {
+                    <option value=item>@item.Name</option>
+                }
+            </select>
+
+            <select class="form-select" aria-label="Default select example">
+                <option selected>To</option>
+                @foreach (var item in stations)
+                {
+                    <option value=item>@item.Name</option>
+                }
+            </select>
+
+            <input class="date" type="date" id="date" />
+
+        <input type="submit" value="Find Trips" class="btn" style="background-color:#FEC91B;margin-bottom:3px" />
+        </form>
+
+    </div>
+
+
+
+
+<div class="container">
+
+    <div class="row mt-5">
+        <div class="col">
+            <h3 class="mb-4">How to Find Cheap Bus Tickets</h3>
+
+            <p>If you're looking for the best bus deals when traveling, Bus Trip has you covered! You can find offers from thousands of bus companies and millions of bus routes in the United States and abroad. Then, you can compare arrival and departure times, pick-up and drop-off points, travel duration, and of course the best bus ticket prices.</p>
+
+            <p>To make your search even easier, you can customize everything to your needs. Optimize your results by sorting them by price, departure and arrival time and/or filter by stop or bus company. Once you find the perfect bus trip, all you need to do is select it and book on our partner's page!</p>
+        </div>
+    </div>
+
+    <div class="row mt-5 mb-4">
+        <div class="col-12 col-md-3">
+            <img class="icon" src="~/Images/1.webp"/>
+            <p class="icon" style="font-weight:bolder">Worldwide Connections</p>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <img class="icon" src="~/Images/2.webp" />
+            <p class="icon" style="font-weight:bolder">Over 100 cities</p>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <img class="icon" src="~/Images/3.webp" />
+            <p class="icon" style="font-weight:bolder">Over 2,000 bus stations</p>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <img class="icon" src="~/Images/4.webp" />
+            <p class="icon" style="font-weight:bolder">Hundreds of bus routes</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/Images/B1.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Images/B2.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Images/B3.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col">
+            <h2 class="mb-4">FAQs</h2>
+            <div class="accordion mb-4" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            How can I find cheap bus tickets?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>You can find the cheapest bus tickets with CheckMyBus to search from thousands of bus companies in just one place. Whether you're looking for American or international bus deals, all you have to do is enter your departure point and destination as well as your travel date, and our search engine will show you all available bus routes. What's more, you can optimize everything to your specific travel needs for the perfect bus trip. Sort your results by price or departure/arrival time and filter them by company or bus stop.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            How can I book a bus ticket?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>When you click on a bus trip you'd like to book, you'll be redirected to the company's website to book and purchase your ticket. Then, the bus company will send you your valid ticket and everything related to your booking by e-mail.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Which bus companies in the USA are the most important?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>Greyhound, FlixBus and megabus US offer bus routes across the United States. Jefferson Lines, Peter Pan Bus Lines, Trailways and OurBus offer more regional connections and airport shuttles. Here you can get a list of all bus companies in the USA and abroad.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            What services are provided by buses?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>Different bus companies offer different onboard services and amenities. These could include free WiFi, extra legroom, or snacks and drinks. If you'd like to know what services a certain bus company offers, then you can check out the specific provider page at CheckMyBus. Here you can find a list of all bus companies.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Why should I travel by bus?
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>Bus travel has come a long way in recent years. Intercity bus trips aren't only affordable but also very comfortable thanks to onboard services and amenities. With free WiFi, you can use your trip to get work done or keep yourself entertained along the way. Comfortable seats and added legroom help you feel right at home for the duration of your journey. Furthermore, bus travel is also far more eco-friendly than driving private cars and helps reduce heavy traffic. The Government Initiative Act On CO2 calculated that buses are the mode of transportation with the lowest emissions at only 4.8 kg of CO2 per passenger. No matter if you're a student, tourist or commuter, bus transportation can help you save both the environment and your money!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            How can I find buses abroad?
+                        </button>
+                    </h2>
+                    <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>If you're traveling outside of the United States, CheckMyBus can help you find offers from thousands of bus providers in more than 80 countries to over 100,000 cities. You can search for buses overseas in your native language to make planning your bus trip as convenient as possible.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            Which is the most eco-friendly way to travel?
+                        </button>
+                    </h2>
+                    <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>Buses are a highly environmentally friendly mode of transportation. Calculations from the the Government Initiative Act On CO2 say that the bus is the method of transportation with the lowest emissions at only 4.8 kg of CO2 per passenger. Therefore, you are actually helping the environment when you take a bus instead of driving a car.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                            What are the advantages of buses over trains or cars?
+                        </button>
+                    </h2>
+                    <div id="collapseEight" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>Traveling by bus is the cheapest mode of transportation in the United States. Due to competing bus companies, like FlixBus and megabus, it can be easy to find cheap bus tickets for long distances. Meanwhile, fuel prices for private cars are often increasing. The American bus network is also cheaper and more comprehensive than its railways.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+
+<script>
+    var today = new Date().toISOString().split('T')[0];
+
+    document.getElementById("date").setAttribute("min", today);
+</script>

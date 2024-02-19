@@ -1,4 +1,6 @@
+using EasyBus.Models;
 using EasyBusProject.Models;
+using EasyBusProject.RepoServices;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,18 +10,17 @@ namespace EasyBusProject.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public StationRepoServices StationRepoServices { get; set; }
+
+        public HomeController(ILogger<HomeController> logger, StationRepoServices station)
         {
             _logger = logger;
+            StationRepoServices = station;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
+            ViewBag.Stations = StationRepoServices.GetAll();
             return View();
         }
 

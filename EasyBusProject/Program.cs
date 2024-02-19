@@ -1,8 +1,10 @@
 using EasyBus.Models;
+using EasyBusProject.RepoServices;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
 using System;
 
 namespace EasyBusProject
@@ -23,6 +25,8 @@ namespace EasyBusProject
             builder.Services.AddDbContext<MainDbContext>(options =>
                options.UseSqlServer(connectionString));
 
+            builder.Services.AddScoped<StationRepoServices>();
+
             builder.Services.AddIdentity<User, IdentityRole<int>>(options => {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
@@ -30,17 +34,18 @@ namespace EasyBusProject
             })
             .AddEntityFrameworkStores<MainDbContext>();
 
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-            })
-            .AddCookie()
-             .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
-             {
-                 options.ClientId = builder.Configuration.GetSection("GoogleKeys:ClientId").Value;
-                 options.ClientSecret = builder.Configuration.GetSection("GoogleKeys:ClientSecret").Value;
-             });
+
+            //builder.Services.AddAuthentication(options =>
+            //{
+            //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            //})
+            //.AddCookie()
+            // .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+            // {
+            //     options.ClientId = builder.Configuration.GetSection("GoogleKeys:ClientId").Value;
+            //     options.ClientSecret = builder.Configuration.GetSection("GoogleKeys:ClientSecret").Value;
+            // });
 
             var app = builder.Build();
 
@@ -58,7 +63,7 @@ namespace EasyBusProject
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Buses}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }

@@ -32,11 +32,21 @@
         img {
             width: 50px;
         }
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .content {
+            flex: 1;
+        }
     </style>
 </head>
-<body>
+<body >
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="logo" src="~/Images/bus-trip-high-resolution-logo-transparent.png" /></a>
                 
@@ -48,7 +58,7 @@
                     <ul class="navbar-nav flex-grow-1 justify-content-end">
                         @* @if (!User.Identity.IsAuthenticated && User.IsInRole("Admin")) *@
                         <li class="nav-item">
-                            <select class="mt-2 " id="redirectSelect" onchange="redirectToUrl()">
+                            <select class="mt-2 " style="width:120px" id="redirectSelect" onchange="redirectToUrl()">
                                 <option value="">Admin Action</option>
                                 <option value="/Stations/Index">Stations</option>
                                 <option value="/Trip/Index">Trips</option>
@@ -80,13 +90,13 @@
         </nav>
     </header>
 
-    <div class="container">
-        <main role="main" class="pb-3">
+   <div class="content container">
+      <main role="main" class="pb-3"> 
             @RenderBody()
-        </main>
-    </div>
+      </main>
+   </div> 
 
-    <footer class="border-top footer text-muted fixed-bottom">
+    <footer class="border-top footer text-muted">
         <div class="container" style="width:50%">
             <div class="row  d-flex justify-content-between mt-3">
                 <div class="col-12 col-sm-3">
