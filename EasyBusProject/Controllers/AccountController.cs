@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 
 namespace EasyBusProject.Controllers
@@ -110,14 +111,36 @@ namespace EasyBusProject.Controllers
 
         public async Task<IActionResult> GoogleLoginRedirect()
         {
-            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            var claims = result.Principal.Identities.FirstOrDefault().Claims.Select(claim => new
+            var authenticateResult = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+
+            if (!authenticateResult.Succeeded)
             {
-                claim.Issuer,
-                claim.OriginalIssuer,
-                claim.Type,
-                claim.Value
-            });
+                return RedirectToAction("Index", "Home");
+            }
+
+            var userEmail = authenticateResult.Principal.FindFirst(ClaimTypes.Email)?.Value;
+            var userName = authenticateResult.Principal.FindFirst(ClaimTypes.Name)?.Value;
+
+            var existingUser = await UserManager.FindByEmailAsync(userEmail);
+
+            if (existingUser == null)
+            {
+                var newUser = new User
+                {
+                    UserName = userName,
+                    Email = userEmail,
+                    ClientName = userName,
+                };
+
+                var createResult = await UserManager.CreateAsync(newUser);
+
+                if (!createResult.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, authenticateResult.Principal);
 
             return RedirectToAction("Index", "Home");
 
