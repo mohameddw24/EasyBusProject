@@ -1,4 +1,6 @@
 using EasyBus.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +11,11 @@ namespace EasyBusProject
     {
         public static void Main(string[] args)
         {
+
+
             var builder = WebApplication.CreateBuilder(args);
+
+         
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -23,6 +29,18 @@ namespace EasyBusProject
                 options.Password.RequireDigit = false;
             })
             .AddEntityFrameworkStores<MainDbContext>();
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            })
+            .AddCookie()
+             .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+             {
+                 options.ClientId = builder.Configuration.GetSection("GoogleKeys:ClientId").Value;
+                 options.ClientSecret = builder.Configuration.GetSection("GoogleKeys:ClientSecret").Value;
+             });
 
             var app = builder.Build();
 
