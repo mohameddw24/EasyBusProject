@@ -3,8 +3,53 @@
 @{
     ViewData["Title"] = "Register";
 }
+<style>
+    .sec{
+        /*  margin-block: 5% ; */
+         width:100% !important;
+          background-size: cover;
+    }
+    .cardd {
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust the last value (alpha) to change transparency */
+}
+.btn{
+    background-color:#FEC91B;
+    transition: all 0.3s !important;
 
-<h1>Register</h1>
+}
+.btn:hover{
+    background-color: #c89c0c !important;
+}
+.con{
+     margin-top:10%; 
+      margin-bottom: 5% ;
+}
+
+
+  
+    .gradient-custom-3 {
+/* fallback for old browsers */
+background: #84fab0;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+}
+.gradient-custom-4 {
+/* fallback for old browsers */
+background: #84fab0;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+}
+</style>
+
+@* <h1>Register</h1>
 
 <hr />
 <div class="row">
@@ -39,8 +84,66 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to List</a> *@
+@* </div> *@
+<div class="sec bg-image"
+  style="background-image: url('https://i0.wp.com/londonblog.tfl.gov.uk/wp-content/uploads/2021/09/bus-by-houses-of-parliament.jpg?fit=1200%2C800&ssl=1');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6 con">
+          <div class="card cardd" style="border-radius: 15px;">
+            <div class="card-body cbody p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+              <form asp-action="Register" class="fform">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                <label asp-for="ClientName" class="control-label"></label>
+                <input asp-for="ClientName" class="form-control" />
+                <span asp-validation-for="ClientName" class="text-danger"></span>
+            </div>
+
+                 <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+                <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+                <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+              
+
+                <div class="d-flex justify-content-center">
+                  <button type="button btn"
+                    class="btn btn-success btn-block btn-lg  text-body">Register</button>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Have already an account?
+                    <a asp-action="login" asp-controller="Account"> <u>Login here</u></a>
+                    </p>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
