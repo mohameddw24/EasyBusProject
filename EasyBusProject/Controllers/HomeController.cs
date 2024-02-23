@@ -32,7 +32,12 @@ namespace EasyBusProject.Controllers
         public IActionResult ContactUs(ContactUs form)
         {
             ContactUsRepoServices.Add(form);
-            return RedirectToAction("Index");
+            return RedirectToAction("ThankYou");
+        }
+
+        public IActionResult ThankYou() 
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
