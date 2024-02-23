@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Destinations";
+}
+@{
+    var stations = ViewBag.Stations;
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <h2 class="mt-5">Our Destinations</h2>
+        @foreach (var item in stations)
+        {
+            <div class="col-6 col-md-3 mt-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body text-center">
+                        <a class="card-title" href="/Home/Destination?id=@item.Id">@item.Name</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

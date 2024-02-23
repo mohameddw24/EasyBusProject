@@ -313,6 +313,57 @@
     </div>
     <!-- Banner End -->
 
+    <div class="container-fluid">
+
+        <html>
+        <head>
+            <link rel="stylesheet"
+                  type="text/css"
+                  href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css" />
+            <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
+        </head>
+        <body>
+
+            <h1 class="display-4 text-uppercase text-center mb-5">Our Locations</h1>
+
+
+            <div class="d-flex justify-content-center text-center mb-5">
+                <div id="map" style="width: 700px; height: 500px;"></div>
+            </div>
+
+
+            <script>
+
+                let center = [30.0444, 31.2357];
+                let cairo = [31.2444, 30.0357];
+                let fayoum = [30.842850, 29.308402];
+                let damietta = [31.814443, 31.417539];
+                let portsaid = [32.314443, 31.217539];
+                let giza = [31.1444, 30.0357];
+                let behera = [30.4744, 31.0357];
+
+
+                var map = tt.map({
+                    key: "6G0VZ9CO43xenzBaAAHF6yz2U7ppNsva",
+                    container: "map",
+                    center: cairo,
+                    zoom: 6
+                })
+                map.on('load', () => {
+                    new tt.Marker().setLngLat(center).addTo(map),
+                        new tt.Marker().setLngLat(cairo).addTo(map),
+                        new tt.Marker().setLngLat(fayoum).addTo(map),
+                        new tt.Marker().setLngLat(damietta).addTo(map),
+                        new tt.Marker().setLngLat(portsaid).addTo(map),
+                        new tt.Marker().setLngLat(giza).addTo(map),
+                        new tt.Marker().setLngLat(behera).addTo(map)
+
+                })
+            </script>
+        </body>
+    </html>
+</div>
+
  
     <!-- Testimonial Start -->
     <div class="container-fluid py-5">
@@ -566,6 +617,8 @@
             </div>
         </div>
     </div>
+
+    
 
 
     <!-- JavaScript Libraries -->

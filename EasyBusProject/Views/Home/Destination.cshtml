@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Destination";
+}
+
+
+
+<div class="container-fluid">
+
+    <html>
+    <head>
+        <link rel="stylesheet"
+              type="text/css"
+              href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css" />
+        <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
+    </head>
+    <body>
+
+        <h1 class="display-4 text-uppercase text-center mb-5 mt-3">@ViewBag.Station.Name Bus Stop Location</h1>
+
+        <div class="d-flex justify-content-center text-center mb-5">
+            <div id="map" style="width: 700px; height: 500px;"></div>
+        </div>
+
+
+        <script>
+            let center = [@ViewBag.Station.Latitude, @ViewBag.Station.Longitude]
+
+            var map = tt.map({
+                key: "wWGoTc59jx3kbaw2aA8x0jTy7lE9F0Pe",
+                container: "map",
+                center: center,
+                zoom: 12
+            })
+            map.on('load', () => {
+                new tt.Marker().setLngLat(center).addTo(map)
+
+            })
+        </script>
+    </body>
+</html>
+</div>

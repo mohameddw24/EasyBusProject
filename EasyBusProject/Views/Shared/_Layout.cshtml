@@ -66,6 +66,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <a style="color:dodgerblue;margin-left:50px" asp-area="" asp-controller="Home" asp-action="Destinations">Destinations</a>
+                    </ul>
                     <ul class="navbar-nav flex-grow-1 justify-content-end">
                         @* @if (!User.Identity.IsAuthenticated && User.IsInRole("Admin")) *@
                         <li class="nav-item">
@@ -119,7 +122,7 @@
                     <a style="color:white" asp-area="" asp-controller="Home" asp-action="Index">About Us</a>
                 </div>
                 <div class="col-12 col-sm-3">
-                    <a style="color:white" asp-area="" asp-controller="Home" asp-action="Index">Destinations</a>
+                    <a style="color:white" asp-area="" asp-controller="Home" asp-action="Destinations">Destinations</a>
                 </div>
                 <div class="col-12 col-sm-3">
                     <a style="color:white" asp-area="" asp-controller="Home" asp-action="Index">Book a Ticket</a>
