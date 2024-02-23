@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using EasyBusProject.ViewModels;
@@ -46,16 +46,16 @@ namespace EasyBus.Models
 
 
             modelBuilder.Entity<Station>().HasData(
-                new Station { Id = 1, Name = "Alexandria", City = "Alexandria" },
-                new Station { Id = 2, Name = "Beheira", City = "Beheira" },
-                new Station { Id = 3, Name = "Bani Suef", City = "Bani Suef" },
-                new Station { Id = 4, Name = "Cairo", City = "Cairo" },
-                new Station { Id = 5, Name = "Damietta", City = "Damietta" },
-                new Station { Id = 6, Name = "Fayoum", City = "Fayoum" },
-                new Station { Id = 7, Name = "Giza", City = "Giza" },
-                new Station { Id = 8, Name = "Monofiya", City = "Monofiya" },
-                new Station { Id = 9, Name = "Port Said", City = "Port Said" },
-                new Station { Id = 10, Name = "Tanta", City = "Tanta" }
+                new Station { Id = 1, Name = "Alexandria", City = "Alexandria", Latitude = 30.0444, Longitude = 31.2357 },
+                new Station { Id = 2, Name = "Beheira", City = "Beheira", Latitude = 30.4744, Longitude = 31.0357 },
+                new Station { Id = 3, Name = "Bani Suef", City = "Bani Suef", Latitude = 29.066127, Longitude = 31.099385 },
+                new Station { Id = 4, Name = "Cairo", City = "Cairo", Latitude = 31.2444, Longitude = 30.0357 },
+                new Station { Id = 5, Name = "Damietta", City = "Damietta", Latitude = 31.814443, Longitude = 31.417539 },
+                new Station { Id = 6, Name = "Fayoum", City = "Fayoum", Latitude = 30.842850, Longitude = 29.308402 },
+                new Station { Id = 7, Name = "Giza", City = "Giza", Latitude = 31.1444, Longitude = 30.0357 },
+                new Station { Id = 8, Name = "Monofiya", City = "Monofiya", Latitude = 30.465928, Longitude = 30.930580 },
+                new Station { Id = 9, Name = "Port Said", City = "Port Said", Latitude = 32.314443, Longitude = 31.217539 },
+                new Station { Id = 10, Name = "Tanta", City = "Tanta", Latitude = 30.777818, Longitude = 30.991126 }
             );
 
             modelBuilder.Entity<Bus>().HasData(
@@ -88,7 +88,8 @@ namespace EasyBus.Models
         }
         public DbSet<EasyBusProject.ViewModels.RegisterUserVM> RegisterUserVM { get; set; } = default!;
         public DbSet<EasyBusProject.ViewModels.LoginUserVM> LoginUserVM { get; set; } = default!;
-        public DbSet<EasyBusProject.ViewModels.DetailsOfReservedTripVM> DetailsOfReservedTripVM { get; set; } = default!;
+        public DbSet<EasyBusProject.ViewModels.DetailsOfReservedTripVM> DetailsOfReservedTripVM { get; set; } = default!; 
+
 
     }
 }

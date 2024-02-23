@@ -1,0 +1,53 @@
+﻿@model IEnumerable<EasyBusProject.ViewModels.UserRoleVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form method="post">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsAdmin)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+  
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                        <input type="checkbox" name="userRoleDictVM.UserIdList" value="@item?.Id" />
+
+                </td>
+                    <td>
+                        <input hidden data-val="true" name="userRole[@item.Id]" type="checkbox" value="@item?.IsAdmin" />
+                            
+                    </td>
+                <td>
+                        <input type="hidden" name="Id"  class="Id" value="@item?.Id" />
+
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+
+    <input type="submit" value="Change" />
+</form>
+
+
+<script src="~/js/UserRole.js" ></script>

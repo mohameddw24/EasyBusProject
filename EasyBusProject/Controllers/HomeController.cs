@@ -40,6 +40,19 @@ namespace EasyBusProject.Controllers
             return View();
         }
 
+        public IActionResult Destinations()
+        {
+            ViewBag.Stations = StationRepoServices.GetAll();
+            return View();
+        }
+
+        public IActionResult Destination(int id)
+        {
+            ViewBag.Station = StationRepoServices.Details(id);
+
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
