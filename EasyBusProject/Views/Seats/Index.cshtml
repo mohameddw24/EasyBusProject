@@ -1,0 +1,106 @@
+﻿@model EasyBusProject.ViewModels.CheckBoxViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    input {
+        
+    }
+    .bus {
+        background-color: #FEC91B;
+        width: 250px;
+        padding-bottom: 20px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+
+        border-width: 4px;
+        border-color:black;
+        border-style: solid;
+    }
+    img {
+        margin-top:25px;
+        margin-left:17px;
+    }
+
+    .custom-checkbox {
+        width:40px;
+        height: 40px;
+        border-radius: 5px;
+        background-color:white;
+
+        cursor:pointer;
+
+        margin-top: 5px;
+    }
+
+    input[type="checkbox"]:checked + .custom-checkbox {
+        /* Your styles for the label when the checkbox is checked */
+        /* For example, change color */
+        background-color: lightgreen;
+    }
+
+    label {
+        width:20px;
+        height:20px;
+    }
+
+</style>
+
+<h1>Index</h1>
+
+
+    @using (Html.BeginForm("Index", "Seats", FormMethod.Post))
+    {
+    <div class="container bus">
+        @{
+            var i = 1; int[] nums = [1, 2, 3, 4, 5, 6, 7,8,9,10];
+        }
+        <img width="40px" src="~/Images/steering-wheel-transparent-background-15.png"/>
+        <hr />
+        @foreach (var item in nums)
+        {
+            <div class="row">
+                <div class="col text-center">
+
+                    <input hidden data-val="true" data-val-required="The Boolean field is required." id="S @i" name="CheckboxValues[@i]" type="checkbox" value="true" />
+                    <label for="S @i" class="custom-checkbox"><b>@i</b></label>
+                    @{
+                        i++;
+                    }
+
+
+                    <input hidden data-val="true" data-val-required="The Boolean field is required." id="S @i" name="CheckboxValues[@i]" type="checkbox" value="true" />
+                    <label for="S @i" class="custom-checkbox"><b>@i</b></label>
+                    @{
+                        i++;
+                    }
+
+
+                    <input hidden style="margin-left:20px;" data-val="true" data-val-required="The Boolean field is required." id="S @i" name="CheckboxValues[@i]" type="checkbox" value="true" />
+                    <label for="S @i" style="margin-left:20px;" class="custom-checkbox"><b>@i</b></label>
+                    @{
+                        i++;
+                    }
+
+
+                    <input hidden data-val="true" data-val-required="The Boolean field is required." id="S @i" name="CheckboxValues[@i]" type="checkbox" value="true" />
+                    <label for="S @i" class="custom-checkbox"><b>@i</b></label>
+                    @{
+                        i++;
+                    }
+
+                </div>
+            </div>
+
+        }
+            
+        </div>
+
+        <div class="text-center mt-5 mb-3">
+            <input class="btn btn-warning" type="submit" value="Buy Seats" />
+        </div>
+    }
