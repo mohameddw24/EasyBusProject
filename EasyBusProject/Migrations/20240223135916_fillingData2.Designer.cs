@@ -4,6 +4,7 @@ using EasyBus.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyBusProject.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    partial class MainDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240223135916_fillingData2")]
+    partial class fillingData2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -286,7 +289,7 @@ namespace EasyBusProject.Migrations
                             AvailableDays = "[0,1,2,3,4,5,6]",
                             BusId = 1,
                             DropOffID = 2,
-                            Duration = 1,
+                            Duration = 0,
                             Name = "A",
                             PickUpID = 1,
                             Price = 200m,
@@ -298,7 +301,7 @@ namespace EasyBusProject.Migrations
                             AvailableDays = "[0,1]",
                             BusId = 1,
                             DropOffID = 3,
-                            Duration = 2,
+                            Duration = 0,
                             Name = "B",
                             PickUpID = 2,
                             Price = 300m,
@@ -310,7 +313,7 @@ namespace EasyBusProject.Migrations
                             AvailableDays = "[0,1]",
                             BusId = 1,
                             DropOffID = 4,
-                            Duration = 1,
+                            Duration = 0,
                             Name = "C",
                             PickUpID = 3,
                             Price = 400m,
@@ -322,7 +325,7 @@ namespace EasyBusProject.Migrations
                             AvailableDays = "[0,1]",
                             BusId = 1,
                             DropOffID = 5,
-                            Duration = 2,
+                            Duration = 0,
                             Name = "D",
                             PickUpID = 4,
                             Price = 500m,
@@ -334,7 +337,7 @@ namespace EasyBusProject.Migrations
                             AvailableDays = "[0,1]",
                             BusId = 1,
                             DropOffID = 6,
-                            Duration = 1,
+                            Duration = 0,
                             Name = "E",
                             PickUpID = 5,
                             Price = 100m,
@@ -346,7 +349,7 @@ namespace EasyBusProject.Migrations
                             AvailableDays = "[0,1]",
                             BusId = 1,
                             DropOffID = 7,
-                            Duration = 2,
+                            Duration = 0,
                             Name = "F",
                             PickUpID = 6,
                             Price = 200m,
@@ -358,7 +361,7 @@ namespace EasyBusProject.Migrations
                             AvailableDays = "[0,1]",
                             BusId = 1,
                             DropOffID = 8,
-                            Duration = 1,
+                            Duration = 0,
                             Name = "G",
                             PickUpID = 7,
                             Price = 300m,
@@ -370,7 +373,7 @@ namespace EasyBusProject.Migrations
                             AvailableDays = "[0,1]",
                             BusId = 1,
                             DropOffID = 9,
-                            Duration = 2,
+                            Duration = 0,
                             Name = "H",
                             PickUpID = 8,
                             Price = 400m,
@@ -382,7 +385,7 @@ namespace EasyBusProject.Migrations
                             AvailableDays = "[0,1]",
                             BusId = 1,
                             DropOffID = 10,
-                            Duration = 1,
+                            Duration = 0,
                             Name = "I",
                             PickUpID = 9,
                             Price = 500m,
@@ -394,7 +397,7 @@ namespace EasyBusProject.Migrations
                             AvailableDays = "[0,1]",
                             BusId = 1,
                             DropOffID = 9,
-                            Duration = 2,
+                            Duration = 0,
                             Name = "J",
                             PickUpID = 10,
                             Price = 600m,

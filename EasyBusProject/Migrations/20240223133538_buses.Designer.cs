@@ -4,6 +4,7 @@ using EasyBus.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyBusProject.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    partial class MainDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240223133538_buses")]
+    partial class buses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,69 +59,6 @@ namespace EasyBusProject.Migrations
                         new
                         {
                             Id = 2,
-                            Category = 2,
-                            Model = "Higer",
-                            Seats = 32
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Category = 1,
-                            Model = "BYD",
-                            Seats = 52
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Category = 0,
-                            Model = "MCV",
-                            Seats = 14
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Category = 2,
-                            Model = "Solaris",
-                            Seats = 32
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Category = 1,
-                            Model = "MCV",
-                            Seats = 52
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Category = 0,
-                            Model = "Toyota",
-                            Seats = 14
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Category = 2,
-                            Model = "MCV",
-                            Seats = 32
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Category = 1,
-                            Model = "Scania",
-                            Seats = 52
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Category = 0,
-                            Model = "Volvo",
-                            Seats = 14
-                        },
-                        new
-                        {
-                            Id = 11,
                             Category = 2,
                             Model = "MCV",
                             Seats = 32
@@ -278,128 +218,6 @@ namespace EasyBusProject.Migrations
                     b.HasIndex("PickUpID");
 
                     b.ToTable("Trip");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AvailableDays = "[0,1,2,3,4,5,6]",
-                            BusId = 1,
-                            DropOffID = 2,
-                            Duration = 1,
-                            Name = "A",
-                            PickUpID = 1,
-                            Price = 200m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 3,
-                            Duration = 2,
-                            Name = "B",
-                            PickUpID = 2,
-                            Price = 300m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 4,
-                            Duration = 1,
-                            Name = "C",
-                            PickUpID = 3,
-                            Price = 400m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 5,
-                            Duration = 2,
-                            Name = "D",
-                            PickUpID = 4,
-                            Price = 500m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 6,
-                            Duration = 1,
-                            Name = "E",
-                            PickUpID = 5,
-                            Price = 100m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 7,
-                            Duration = 2,
-                            Name = "F",
-                            PickUpID = 6,
-                            Price = 200m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 8,
-                            Duration = 1,
-                            Name = "G",
-                            PickUpID = 7,
-                            Price = 300m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 9,
-                            Duration = 2,
-                            Name = "H",
-                            PickUpID = 8,
-                            Price = 400m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 10,
-                            Duration = 1,
-                            Name = "I",
-                            PickUpID = 9,
-                            Price = 500m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 9,
-                            Duration = 2,
-                            Name = "J",
-                            PickUpID = 10,
-                            Price = 600m,
-                            Time = new TimeOnly(2, 0, 0)
-                        });
                 });
 
             modelBuilder.Entity("EasyBus.Models.User", b =>
