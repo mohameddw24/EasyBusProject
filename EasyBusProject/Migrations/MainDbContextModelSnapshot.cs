@@ -139,6 +139,10 @@ namespace EasyBusProject.Migrations
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
 
+                    b.Property<string>("NumOfSeatsReserved")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("TripId")
                         .HasColumnType("int");
 
@@ -488,6 +492,10 @@ namespace EasyBusProject.Migrations
                     b.Property<int>("ScheduleId")
                         .HasColumnType("int");
 
+                    b.Property<string>("SeatsTaken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -563,6 +571,9 @@ namespace EasyBusProject.Migrations
 
                     b.Property<TimeOnly>("Time")
                         .HasColumnType("time");
+
+                    b.Property<int>("TotalCapacity")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .IsRequired()

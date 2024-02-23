@@ -28,6 +28,8 @@ namespace EasyBus.Models
 
         public int AvailableSeatsInTrip { get; set; }
 
+        public string NumOfSeatsReserved { get; set; } = "";
+
         public ICollection<UserSchedule> UserSchedules { get; set; }
         
     }

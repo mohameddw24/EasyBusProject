@@ -1,78 +1,244 @@
 ﻿@model EasyBusProject.ViewModels.DetailsOfReservedTripVM
+@* @model EasyBusProject.ViewModels.CheckBoxViewModel *@
+
 
 @{
     ViewData["Title"] = "DetailsOfTrip";
 }
 
-<h2>DetailsOfTrip</h2>
+
+<style>
+    input {
+    }
+
+    .bus {
+        background-color: #FEC91B;
+        width: 250px;
+        padding-bottom: 20px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-width: 4px;
+        border-color: black;
+        border-style: solid;
+    }
+
+    img {
+        margin-top: 25px;
+        margin-left: 17px;
+    }
+
+    .custom-checkbox {
+        width: 40px;
+        height: 40px;
+        border-radius: 5px;
+        background-color: white;
+        cursor: pointer;
+        margin-top: 5px;
+    }
+
+    input[type="checkbox"]:checked + .custom-checkbox {
+        /* Your styles for the label when the checkbox is checked */
+        /* For example, change color */
+        background-color: lightgreen;
+    }
+
+    label {
+        width: 20px;
+        height: 20px;
+    }
+
+</style>
+<form asp-action="DetailsOfTrip">
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Your first form goes here -->
+            <div>
+                <h4>DetailsOfReservedTripVM</h4>
+                <hr />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    @* Pass Hidden Data *@
+                    <input type="hidden" name="id" value="@ViewBag.tripId" />
+                    <input type="hidden" name="date" value="@Model.Date" />
+                    <input type="hidden" name="userName" value="@Model.UserName" />
+                    <input type="hidden" name="busName" value="@Model.BusName" />
+                    <input type="hidden" name="price" value="@Model.Price" />
+                    <input type="hidden" name="startFrom" value="@Model.StartFrom" />
+                    <input type="hidden" name="destination" value="@Model.Destination" />
+
+
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.UserName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Date)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Date)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Time)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Time)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.NumOfAvailSeats)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.NumOfAvailSeats)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.BusName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.BusName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Price)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Price)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.StartFrom)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.StartFrom)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Destination)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Destination)
+                        </dd>
+                    </dl>
+                    <div class="text-center mt-5 mb-3">
+                        <input class="btn btn-warning" type="submit" value="Buy Seats" />
+                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- Your second form goes here -->
+           
+                <div class="container bus">
+                    @{
+                        var totalCapacity = Model.TotalCapacity;
+                        var rowNum = totalCapacity / 4 + (totalCapacity % 4 == 0 ? 0 : 1);
+                        var seatNumber = 1;
+                        var seatsTaken = ViewBag.SeatsTaken as string[];
+                    }
+
+                    <img width="40px" src="~/Images/steering-wheel-transparent-background-15.png" />
+                    <hr />
+                    @for (var row = 0; row < rowNum; row++)
+                    {
+                        <div class="row">
+                            @for (var col = 0; col < 4 && seatNumber <= totalCapacity; col++)
+                            {
+                                <div class="col-3 text-center">
+                                    <!-- Adjust grid column size here -->
+                                    @{
+                                        var disabled = seatsTaken != null && seatsTaken.Contains(seatNumber.ToString()) ? "disabled" : "";
+                                        var color = seatsTaken != null && seatsTaken.Contains(seatNumber.ToString()) ? "red" : "black";
+                                    }
+                                    <input hidden data-val="true" data-val-required="The Boolean field is required." id="S @seatNumber" name="CheckboxValues[@seatNumber]" type="checkbox" value="true" @disabled />
+                                    <label for="S @seatNumber" class="custom-checkbox" style="color: @color;"><b>@seatNumber</b></label>
+                                    @{
+                                        seatNumber++;
+                                    }
+                                </div>
+                                @* @if (col != 3 && seatNumber <= totalCapacity)
+                        {
+                        <div class="col-1"></div> <!-- Add space between each two seats -->
+                        } *@
+                            }
+                        </div>
+                    }
+                </div>
+
+
+        </div>
+    </div>
+</div>
+</form>
 
 <div>
-    <h4>DetailsOfReservedTripVM</h4>
-    <hr />
-    <form asp-action="ChooseTrip">
-        <div asp-validation-summary="All" class="text-danger"></div>
-        <input type="hidden" name="id" value="@ViewBag.tripId" />
-        <input type="hidden" name="date" value="@Model.Date" />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Time)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Time)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NumOfAvailSeats)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NumOfAvailSeats)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.BusName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.BusName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.StartFrom)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.StartFrom)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Destination)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Destination)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NumOfSeatsOfUser)
-        </dt>
-        <dd>
-            <input type="number" name="NumOfSeatsOfUser" asp-for="NumOfSeatsOfUser" />
-        </dd>
-    </dl>
-    <input type="submit" value="Submit"/>
-    </form>
-</div>
-<div>
-    <a asp-action="ChooseTrip" asp-route-id="@ViewBag.tripId" asp-route-date="@Model.Date">Select</a>
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* NO NEED THIS *@
+
+@* <div class="container bus">
+                    @{
+                        var i = 1; int[] nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                    }
+                    <img width="40px" src="~/Images/steering-wheel-transparent-background-15.png" />
+                    <hr />
+                    @foreach (var item in nums)
+                    {
+                        <div class="row">
+                            <div class="col text-center">
+
+                                <input hidden data-val="true" data-val-required="The Boolean field is required." id="S @i" name="CheckboxValues[@i]" type="checkbox" value="true" />
+                                <label for="S @i" class="custom-checkbox"><b>@i</b></label>
+                                @{
+                                    i++;
+                                }
+
+
+                                <input hidden data-val="true" data-val-required="The Boolean field is required." id="S @i" name="CheckboxValues[@i]" type="checkbox" value="true" />
+                                <label for="S @i" class="custom-checkbox"><b>@i</b></label>
+                                @{
+                                    i++;
+                                }
+
+
+                                <input hidden style="margin-left:20px;" data-val="true" data-val-required="The Boolean field is required." id="S @i" name="CheckboxValues[@i]" type="checkbox" value="true" />
+                                <label for="S @i" style="margin-left:20px;" class="custom-checkbox"><b>@i</b></label>
+                                @{
+                                    i++;
+                                }
+
+
+                                <input hidden data-val="true" data-val-required="The Boolean field is required." id="S @i" name="CheckboxValues[@i]" type="checkbox" value="true" />
+                                <label for="S @i" class="custom-checkbox"><b>@i</b></label>
+                                @{
+                                    i++;
+                                }
+
+                            </div>
+                        </div>
+
+                    }
+
+                </div> *@
+
+
+@*  <div class="text-center mt-5 mb-3">
+                    <input class="btn btn-warning" type="submit" value="Buy Seats" />
+                </div> *@
