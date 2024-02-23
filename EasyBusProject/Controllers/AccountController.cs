@@ -32,6 +32,12 @@ namespace EasyBusProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                var existingUser = await UserManager.FindByNameAsync(newUserVM.UserName);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("UserName", "Username is already exists");
+                    return View(newUserVM);
+                }
 
                 User newUser = new User();
                 newUser.PasswordHash = newUserVM.Password;
@@ -133,6 +139,9 @@ namespace EasyBusProject.Controllers
                 };
 
                 var createResult = await UserManager.CreateAsync(newUser);
+
+                await UserManager.AddToRoleAsync(newUser, (UserManager.Users.Count() > 0) ? "User" : "Admin");
+
 
                 if (!createResult.Succeeded)
                 {
