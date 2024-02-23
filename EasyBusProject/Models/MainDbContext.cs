@@ -28,9 +28,24 @@ namespace EasyBus.Models
                 .WithMany(s => s.TripsAsDropOff)
                 .HasForeignKey(t => t.DropOffID)
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
+
+            //modelBuilder.Entity<UserSchedule>().HasKey(us => new { us.UserId, us.ScheduleId });
+            //modelBuilder.Entity<UserSchedule>()
+            //    .HasOne(us => us.User)
+            //    .WithMany(u => u.UserSchedules)
+            //    .HasForeignKey(us => us.UserId);
+            //modelBuilder.Entity<UserSchedule>()
+            //    .HasOne(us => us.Schedule)
+            //    .WithMany(s => s.UserSchedules)
+            //    .HasForeignKey(us => us.ScheduleId);
+
+            //modelBuilder.Entity<UserSchedule>()
+            //.HasKey(us => new { us.UserId, us.ScheduleId });
+
         }
         public DbSet<EasyBusProject.ViewModels.RegisterUserVM> RegisterUserVM { get; set; } = default!;
         public DbSet<EasyBusProject.ViewModels.LoginUserVM> LoginUserVM { get; set; } = default!;
+        public DbSet<EasyBusProject.ViewModels.DetailsOfReservedTripVM> DetailsOfReservedTripVM { get; set; } = default!;
 
 
     }

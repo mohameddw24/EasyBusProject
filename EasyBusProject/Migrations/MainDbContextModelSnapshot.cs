@@ -54,8 +54,11 @@ namespace EasyBusProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("AvailableSeatsInTrip")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
 
                     b.Property<int>("TripId")
                         .HasColumnType("int");
@@ -215,6 +218,9 @@ namespace EasyBusProject.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("NumOfSeats")
+                        .HasColumnType("int");
 
                     b.Property<int>("ScheduleId")
                         .HasColumnType("int");

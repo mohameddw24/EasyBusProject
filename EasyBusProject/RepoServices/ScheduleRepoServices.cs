@@ -1,4 +1,5 @@
 ﻿using EasyBus.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EasyBusProject.RepoServices
 {
@@ -22,7 +23,8 @@ namespace EasyBusProject.RepoServices
 
         public List<Schedule> GetAll()
         {
-            return Context.Schedules.ToList();
+            //return Context.Schedules.Include(s => s.Trip.Bus).ToList();
+            return Context.Schedules.Include(s => s.Trip.Bus).Include(u => u.UserSchedules).ToList();
         }
 
         public void Remove(Schedule entity)

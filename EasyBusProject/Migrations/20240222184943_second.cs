@@ -5,24 +5,24 @@
 namespace EasyBusProject.Migrations
 {
     /// <inheritdoc />
-    public partial class AddUserImage : Migration
+    public partial class second : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<byte[]>(
-                name: "Image",
-                table: "AspNetUsers",
-                type: "varbinary(max)",
-                nullable: true);
+            migrationBuilder.RenameColumn(
+                name: "AvailableSeats",
+                table: "Schedule",
+                newName: "AvailableSeatsInTrip");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Image",
-                table: "AspNetUsers");
+            migrationBuilder.RenameColumn(
+                name: "AvailableSeatsInTrip",
+                table: "Schedule",
+                newName: "AvailableSeats");
         }
     }
 }
