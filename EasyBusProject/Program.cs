@@ -1,4 +1,5 @@
 using EasyBus.Models;
+using EasyBusProject.Models;
 using EasyBusProject.RepoServices;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
@@ -27,10 +28,12 @@ namespace EasyBusProject
 
             builder.Services.AddScoped<StationRepoServices>();
             builder.Services.AddScoped<UserScheduleRepoServices>();
+            builder.Services.AddScoped<ContactUsRepoService>();
             builder.Services.AddScoped<IRepository<Station>, StationRepoServices>();
             builder.Services.AddScoped<IRepository<Trip>, TripsRepoServices>();
             builder.Services.AddScoped<IRepository<Schedule>, ScheduleRepoServices>();
             builder.Services.AddScoped<IRepository<UserSchedule>, UserScheduleRepoServices>();
+            builder.Services.AddScoped<IRepository<ContactUs>, ContactUsRepoService>();
 
             builder.Services.AddIdentity<User, IdentityRole<int>>(options => {
                 options.Password.RequireNonAlphanumeric = false;

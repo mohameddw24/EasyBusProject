@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using EasyBusProject.ViewModels;
+using EasyBusProject.Models;
 
 namespace EasyBus.Models
 {
@@ -13,6 +14,7 @@ namespace EasyBus.Models
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Station> Stations { get; set; }
         public virtual DbSet<UserSchedule> UserSchedules{ get; set; }
+        public virtual DbSet<ContactUs> ContactUs { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
