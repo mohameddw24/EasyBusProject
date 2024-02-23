@@ -24,7 +24,7 @@ namespace EasyBusProject.RepoServices
 
         public List<Trip> GetAll()
         {
-            return context.Trips.ToList();
+            return context.Trips.Include(t => t.Bus).Include(s => s.DropOff).Include(s => s.PickUp).ToList();
         }
 
         public void Remove(Trip entity)
