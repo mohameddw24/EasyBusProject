@@ -1,0 +1,77 @@
+﻿@model IEnumerable<EasyBus.Models.Trip>
+
+@{
+    ViewData["Title"] = "Index";
+    string myStringData = ViewData["day"] as string;
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+    <h2>For Date @ViewBag.Date</h2>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                <label>Available Day</label>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PickUp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DropOff)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                    @myStringData
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bus.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickUp.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DropOff.Name)
+            </td>
+            <td>
+                    <a asp-action="DetailsOfTrip" asp-route-id="@item.Id" asp-route-date="@ViewBag.Date">Choose Trip</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

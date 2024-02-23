@@ -18,6 +18,9 @@ namespace EasyBus.Models
         [StringLength(50)]
         public string? City { get; set; }
 
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set;}
+
         [InverseProperty("PickUp")]
         public virtual List<Trip>? TripsAsPickUp { get; set; }
 

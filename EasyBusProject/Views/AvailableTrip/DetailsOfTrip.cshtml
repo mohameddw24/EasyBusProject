@@ -1,0 +1,78 @@
+﻿@model EasyBusProject.ViewModels.DetailsOfReservedTripVM
+
+@{
+    ViewData["Title"] = "DetailsOfTrip";
+}
+
+<h2>DetailsOfTrip</h2>
+
+<div>
+    <h4>DetailsOfReservedTripVM</h4>
+    <hr />
+    <form asp-action="ChooseTrip">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="hidden" name="id" value="@ViewBag.tripId" />
+        <input type="hidden" name="date" value="@Model.Date" />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumOfAvailSeats)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumOfAvailSeats)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BusName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BusName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartFrom)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartFrom)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Destination)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Destination)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumOfSeatsOfUser)
+        </dt>
+        <dd>
+            <input type="number" name="NumOfSeatsOfUser" asp-for="NumOfSeatsOfUser" />
+        </dd>
+    </dl>
+    <input type="submit" value="Submit"/>
+    </form>
+</div>
+<div>
+    <a asp-action="ChooseTrip" asp-route-id="@ViewBag.tripId" asp-route-date="@Model.Date">Select</a>
+    <a asp-action="Index">Back to List</a>
+</div>

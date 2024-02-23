@@ -4,6 +4,7 @@ using EasyBus.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyBusProject.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    partial class MainDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240222185202_third")]
+    partial class third
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,85 +47,6 @@ namespace EasyBusProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Bus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Category = 0,
-                            Model = "Mercedes",
-                            Seats = 14
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Category = 2,
-                            Model = "Higer",
-                            Seats = 32
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Category = 1,
-                            Model = "BYD",
-                            Seats = 52
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Category = 0,
-                            Model = "MCV",
-                            Seats = 14
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Category = 2,
-                            Model = "Solaris",
-                            Seats = 32
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Category = 1,
-                            Model = "MCV",
-                            Seats = 52
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Category = 0,
-                            Model = "Toyota",
-                            Seats = 14
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Category = 2,
-                            Model = "MCV",
-                            Seats = 32
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Category = 1,
-                            Model = "Scania",
-                            Seats = 52
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Category = 0,
-                            Model = "Volvo",
-                            Seats = 14
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Category = 2,
-                            Model = "MCV",
-                            Seats = 32
-                        });
                 });
 
             modelBuilder.Entity("EasyBus.Models.Schedule", b =>
@@ -162,12 +86,6 @@ namespace EasyBusProject.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<double?>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Longitude")
-                        .HasColumnType("float");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -176,88 +94,6 @@ namespace EasyBusProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Station");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            City = "Alexandria",
-                            Latitude = 30.0444,
-                            Longitude = 31.235700000000001,
-                            Name = "Alexandria"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            City = "Beheira",
-                            Latitude = 30.474399999999999,
-                            Longitude = 31.035699999999999,
-                            Name = "Beheira"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            City = "Bani Suef",
-                            Latitude = 29.066127000000002,
-                            Longitude = 31.099385000000002,
-                            Name = "Bani Suef"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            City = "Cairo",
-                            Latitude = 31.244399999999999,
-                            Longitude = 30.035699999999999,
-                            Name = "Cairo"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            City = "Damietta",
-                            Latitude = 31.814443000000001,
-                            Longitude = 31.417539000000001,
-                            Name = "Damietta"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            City = "Fayoum",
-                            Latitude = 30.842849999999999,
-                            Longitude = 29.308402000000001,
-                            Name = "Fayoum"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            City = "Giza",
-                            Latitude = 31.144400000000001,
-                            Longitude = 30.035699999999999,
-                            Name = "Giza"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            City = "Monofiya",
-                            Latitude = 30.465928000000002,
-                            Longitude = 30.930579999999999,
-                            Name = "Monofiya"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            City = "Port Said",
-                            Latitude = 32.314442999999997,
-                            Longitude = 31.217538999999999,
-                            Name = "Port Said"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            City = "Tanta",
-                            Latitude = 30.777818,
-                            Longitude = 30.991126000000001,
-                            Name = "Tanta"
-                        });
                 });
 
             modelBuilder.Entity("EasyBus.Models.Trip", b =>
@@ -304,128 +140,6 @@ namespace EasyBusProject.Migrations
                     b.HasIndex("PickUpID");
 
                     b.ToTable("Trip");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AvailableDays = "[0,1,2,3,4,5,6]",
-                            BusId = 1,
-                            DropOffID = 2,
-                            Duration = 1,
-                            Name = "A",
-                            PickUpID = 1,
-                            Price = 200m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 3,
-                            Duration = 2,
-                            Name = "B",
-                            PickUpID = 2,
-                            Price = 300m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 4,
-                            Duration = 1,
-                            Name = "C",
-                            PickUpID = 3,
-                            Price = 400m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 5,
-                            Duration = 2,
-                            Name = "D",
-                            PickUpID = 4,
-                            Price = 500m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 6,
-                            Duration = 1,
-                            Name = "E",
-                            PickUpID = 5,
-                            Price = 100m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 7,
-                            Duration = 2,
-                            Name = "F",
-                            PickUpID = 6,
-                            Price = 200m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 8,
-                            Duration = 1,
-                            Name = "G",
-                            PickUpID = 7,
-                            Price = 300m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 9,
-                            Duration = 2,
-                            Name = "H",
-                            PickUpID = 8,
-                            Price = 400m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 10,
-                            Duration = 1,
-                            Name = "I",
-                            PickUpID = 9,
-                            Price = 500m,
-                            Time = new TimeOnly(2, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AvailableDays = "[0,1]",
-                            BusId = 1,
-                            DropOffID = 9,
-                            Duration = 2,
-                            Name = "J",
-                            PickUpID = 10,
-                            Price = 600m,
-                            Time = new TimeOnly(2, 0, 0)
-                        });
                 });
 
             modelBuilder.Entity("EasyBus.Models.User", b =>
@@ -524,79 +238,6 @@ namespace EasyBusProject.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserSchedules");
-                });
-
-            modelBuilder.Entity("EasyBusProject.Models.ContactUs", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Subject")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ContactUs");
-                });
-
-            modelBuilder.Entity("EasyBusProject.ViewModels.DetailsOfReservedTripVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BusName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Destination")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumOfAvailSeats")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumOfSeatsOfUser")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StartFrom")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeOnly>("Time")
-                        .HasColumnType("time");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DetailsOfReservedTripVM");
                 });
 
             modelBuilder.Entity("EasyBusProject.ViewModels.LoginUserVM", b =>

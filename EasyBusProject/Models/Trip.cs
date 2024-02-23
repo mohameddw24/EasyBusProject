@@ -22,6 +22,7 @@ namespace EasyBus.Models
         public Bus Bus { get; set; } = null!;
 
         [Required]
+        [DataType(DataType.Time)]
         public TimeOnly Time { get; set; }
 
         [Required]
@@ -49,6 +50,7 @@ namespace EasyBus.Models
 
     public enum WeekDays
     {
-        SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+        Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
     }
+
 }

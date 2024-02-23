@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyBusProject.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20240218010634_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20240223140828_fillingData3")]
+    partial class fillingData3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,85 @@ namespace EasyBusProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Bus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Category = 0,
+                            Model = "Mercedes",
+                            Seats = 14
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Category = 2,
+                            Model = "Higer",
+                            Seats = 32
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Category = 1,
+                            Model = "BYD",
+                            Seats = 52
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Category = 0,
+                            Model = "MCV",
+                            Seats = 14
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Category = 2,
+                            Model = "Solaris",
+                            Seats = 32
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Category = 1,
+                            Model = "MCV",
+                            Seats = 52
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Category = 0,
+                            Model = "Toyota",
+                            Seats = 14
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Category = 2,
+                            Model = "MCV",
+                            Seats = 32
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Category = 1,
+                            Model = "Scania",
+                            Seats = 52
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Category = 0,
+                            Model = "Volvo",
+                            Seats = 14
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Category = 2,
+                            Model = "MCV",
+                            Seats = 32
+                        });
                 });
 
             modelBuilder.Entity("EasyBus.Models.Schedule", b =>
@@ -57,8 +136,11 @@ namespace EasyBusProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("AvailableSeatsInTrip")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
 
                     b.Property<int>("TripId")
                         .HasColumnType("int");
@@ -91,6 +173,68 @@ namespace EasyBusProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Station");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Alexandria",
+                            Name = "Alexandria"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Beheira",
+                            Name = "Beheira"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "Bani Suef",
+                            Name = "Bani Suef"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            City = "Cairo",
+                            Name = "Cairo"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            City = "Damietta",
+                            Name = "Damietta"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            City = "Fayoum",
+                            Name = "Fayoum"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            City = "Giza",
+                            Name = "Giza"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            City = "Monofiya",
+                            Name = "Monofiya"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            City = "Port Said",
+                            Name = "Port Said"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            City = "Tanta",
+                            Name = "Tanta"
+                        });
                 });
 
             modelBuilder.Entity("EasyBus.Models.Trip", b =>
@@ -125,8 +269,8 @@ namespace EasyBusProject.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("Money");
 
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeOnly>("Time")
+                        .HasColumnType("time");
 
                     b.HasKey("Id");
 
@@ -137,6 +281,128 @@ namespace EasyBusProject.Migrations
                     b.HasIndex("PickUpID");
 
                     b.ToTable("Trip");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AvailableDays = "[0,1,2,3,4,5,6]",
+                            BusId = 1,
+                            DropOffID = 2,
+                            Duration = 1,
+                            Name = "A",
+                            PickUpID = 1,
+                            Price = 200m,
+                            Time = new TimeOnly(2, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AvailableDays = "[0,1]",
+                            BusId = 1,
+                            DropOffID = 3,
+                            Duration = 2,
+                            Name = "B",
+                            PickUpID = 2,
+                            Price = 300m,
+                            Time = new TimeOnly(2, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AvailableDays = "[0,1]",
+                            BusId = 1,
+                            DropOffID = 4,
+                            Duration = 1,
+                            Name = "C",
+                            PickUpID = 3,
+                            Price = 400m,
+                            Time = new TimeOnly(2, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AvailableDays = "[0,1]",
+                            BusId = 1,
+                            DropOffID = 5,
+                            Duration = 2,
+                            Name = "D",
+                            PickUpID = 4,
+                            Price = 500m,
+                            Time = new TimeOnly(2, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AvailableDays = "[0,1]",
+                            BusId = 1,
+                            DropOffID = 6,
+                            Duration = 1,
+                            Name = "E",
+                            PickUpID = 5,
+                            Price = 100m,
+                            Time = new TimeOnly(2, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AvailableDays = "[0,1]",
+                            BusId = 1,
+                            DropOffID = 7,
+                            Duration = 2,
+                            Name = "F",
+                            PickUpID = 6,
+                            Price = 200m,
+                            Time = new TimeOnly(2, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AvailableDays = "[0,1]",
+                            BusId = 1,
+                            DropOffID = 8,
+                            Duration = 1,
+                            Name = "G",
+                            PickUpID = 7,
+                            Price = 300m,
+                            Time = new TimeOnly(2, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AvailableDays = "[0,1]",
+                            BusId = 1,
+                            DropOffID = 9,
+                            Duration = 2,
+                            Name = "H",
+                            PickUpID = 8,
+                            Price = 400m,
+                            Time = new TimeOnly(2, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AvailableDays = "[0,1]",
+                            BusId = 1,
+                            DropOffID = 10,
+                            Duration = 1,
+                            Name = "I",
+                            PickUpID = 9,
+                            Price = 500m,
+                            Time = new TimeOnly(2, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AvailableDays = "[0,1]",
+                            BusId = 1,
+                            DropOffID = 9,
+                            Duration = 2,
+                            Name = "J",
+                            PickUpID = 10,
+                            Price = 600m,
+                            Time = new TimeOnly(2, 0, 0)
+                        });
                 });
 
             modelBuilder.Entity("EasyBus.Models.User", b =>
@@ -219,6 +485,9 @@ namespace EasyBusProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("NumOfSeats")
+                        .HasColumnType("int");
+
                     b.Property<int>("ScheduleId")
                         .HasColumnType("int");
 
@@ -232,6 +501,132 @@ namespace EasyBusProject.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserSchedules");
+                });
+
+            modelBuilder.Entity("EasyBusProject.Models.ContactUs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContactUs");
+                });
+
+            modelBuilder.Entity("EasyBusProject.ViewModels.DetailsOfReservedTripVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BusName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Destination")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumOfAvailSeats")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumOfSeatsOfUser")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StartFrom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeOnly>("Time")
+                        .HasColumnType("time");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DetailsOfReservedTripVM");
+                });
+
+            modelBuilder.Entity("EasyBusProject.ViewModels.LoginUserVM", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("RememberMe")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("LoginUserVM");
+                });
+
+            modelBuilder.Entity("EasyBusProject.ViewModels.RegisterUserVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClientName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConfirmPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RegisterUserVM");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>

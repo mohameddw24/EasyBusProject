@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyBusProject.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20240218161715_Second")]
-    partial class Second
+    [Migration("20240223131503_stations")]
+    partial class stations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,8 +57,11 @@ namespace EasyBusProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("AvailableSeatsInTrip")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
 
                     b.Property<int>("TripId")
                         .HasColumnType("int");
@@ -91,6 +94,44 @@ namespace EasyBusProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Station");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Giza",
+                            Name = "Example 1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Cairo",
+                            Name = "Example 2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "Alexandria",
+                            Name = "Example 2"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            City = "Menofia",
+                            Name = "Example 2"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            City = "Mansoura",
+                            Name = "Example 2"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            City = "Fayoum",
+                            Name = "Example 2"
+                        });
                 });
 
             modelBuilder.Entity("EasyBus.Models.Trip", b =>
@@ -219,6 +260,9 @@ namespace EasyBusProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("NumOfSeats")
+                        .HasColumnType("int");
+
                     b.Property<int>("ScheduleId")
                         .HasColumnType("int");
 
@@ -232,6 +276,132 @@ namespace EasyBusProject.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserSchedules");
+                });
+
+            modelBuilder.Entity("EasyBusProject.Models.ContactUs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContactUs");
+                });
+
+            modelBuilder.Entity("EasyBusProject.ViewModels.DetailsOfReservedTripVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BusName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Destination")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumOfAvailSeats")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumOfSeatsOfUser")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StartFrom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeOnly>("Time")
+                        .HasColumnType("time");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DetailsOfReservedTripVM");
+                });
+
+            modelBuilder.Entity("EasyBusProject.ViewModels.LoginUserVM", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("RememberMe")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("LoginUserVM");
+                });
+
+            modelBuilder.Entity("EasyBusProject.ViewModels.RegisterUserVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClientName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConfirmPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RegisterUserVM");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>

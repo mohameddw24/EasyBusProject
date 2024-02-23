@@ -12,19 +12,23 @@ namespace EasyBus.Models
 
         [ForeignKey("Trip")]
         public int TripId { get; set; }
-        public virtual Trip Trip { get; set; } = null!;
+        public virtual Trip Trip { get; set; }
 
-        public DateTime Date { get; set; }
+        [DataType(DataType.Date)]
+        public DateOnly Date { get; set; }
 
         [NotMapped]
         public int TotalCapacity => (int)Trip.Bus.Seats;
 
         [NotMapped]
-        public int ReservedSeats => UserSchedules.Count(us => us.ScheduleId == Id);
+        public int ReservedSeats => UserSchedules.Where(us => us.ScheduleId == Id).Sum(us => us.NumOfSeats);
 
         [NotMapped]
         public int AvailableSeats => TotalCapacity - ReservedSeats;
 
-        public ICollection<UserSchedule> UserSchedules { get; set; } = null!;
+        public int AvailableSeatsInTrip { get; set; }
+
+        public ICollection<UserSchedule> UserSchedules { get; set; }
+        
     }
 }

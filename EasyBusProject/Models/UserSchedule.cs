@@ -8,6 +8,7 @@ namespace EasyBus.Models
     {
         [Key]
         public int Id { get; set; }
+
         [ForeignKey("User")]
         public int UserId { get; set; }
         public User User { get; set; } = null!;
@@ -15,5 +16,6 @@ namespace EasyBus.Models
         [ForeignKey("Schedule")]
         public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; } = null!;
+        public int NumOfSeats { get; set; } = 1;
     }
 }
