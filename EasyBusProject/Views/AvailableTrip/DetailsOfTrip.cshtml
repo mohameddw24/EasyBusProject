@@ -50,13 +50,15 @@
     }
 
 </style>
+
+
 <form asp-action="DetailsOfTrip">
 <div class="container">
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-md-6">
             <!-- Your first form goes here -->
             <div>
-                <h4>DetailsOfReservedTripVM</h4>
+                <h4>Choose Your Seat</h4>
                 <hr />
                     <div asp-validation-summary="All" class="text-danger"></div>
                     @* Pass Hidden Data *@
@@ -67,17 +69,12 @@
                     <input type="hidden" name="price" value="@Model.Price" />
                     <input type="hidden" name="startFrom" value="@Model.StartFrom" />
                     <input type="hidden" name="destination" value="@Model.Destination" />
-                    <input type="hidden" name="seats" value="@Model.Seats" />
+                    @* <input type="hidden" name="seats" value="@Model.Seats" /> *@
 
 
 
                     <dl class="dl-horizontal">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.UserName)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.UserName)
-                        </dd>
+                        
                         <dt>
                             @Html.DisplayNameFor(model => model.Date)
                         </dt>
@@ -129,7 +126,7 @@
         <div class="col-md-6">
             <!-- Your second form goes here -->
            
-                <div class="container bus">
+                <div class="container bus mt-5">
                     @{
                         var totalCapacity = Model.TotalCapacity;
                         var rowNum = totalCapacity / 4 + (totalCapacity % 4 == 0 ? 0 : 1);
@@ -170,11 +167,6 @@
     </div>
 </div>
 </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 
 
 
