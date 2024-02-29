@@ -24,7 +24,7 @@
         border-style: solid;
     }
 
-    img {
+    .wheel {
         margin-top: 25px;
         margin-left: 17px;
     }
@@ -134,7 +134,7 @@
                         var seatsTaken = ViewBag.SeatsTaken as string[];
                     }
 
-                    <img width="40px" src="~/Images/steering-wheel-transparent-background-15.png" />
+                    <img class="wheel" width="40px" src="~/Images/steering-wheel-transparent-background-15.png" />
                     <hr />
                     @for (var row = 0; row < rowNum; row++)
                     {

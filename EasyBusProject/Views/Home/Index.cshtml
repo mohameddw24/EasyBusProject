@@ -36,7 +36,9 @@
         outline: 0;
         box-shadow: none;
     }
-
+    a {
+        text-decoration:none;
+    }
 
 </style>
 
@@ -93,7 +95,7 @@
         <br />
 
         <form action="/AvailableTrip/index" method="post" class="mb-5">
-            <select class="form-select" aria-label="Default select example" name="pickUp">
+            <select required class="form-select" aria-label="Default select example" name="pickUp">
                 <option selected>From</option>
                 @foreach (var item in stations)
                 {
@@ -101,7 +103,7 @@
                 }
             </select>
 
-            <select class="form-select" aria-label="Default select example" name="dropOff">
+            <select required class="form-select" aria-label="Default select example" name="dropOff">
                 <option selected>To</option>
                 @foreach (var item in stations)
                 {
@@ -109,7 +111,7 @@
                 }
             </select>
 
-            <input class="date" type="date" id="date" name="date"/>
+            <input required class="date" type="date" id="date" name="date"/>
 
             <input type="submit" value="Find Trips" class="btn" style="background-color:#FEC91B;margin-bottom:3px" />
         </form>
@@ -411,7 +413,7 @@
     </div>
     <!-- Testimonial End -->
     <!-- Contact Start -->
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-5" id="contactus">
         <div class="container pt-5 pb-3">
             <h1 class="display-4 text-uppercase text-center mb-5">Contact Us</h1>
             <div class="row">
@@ -474,7 +476,7 @@
 
 
             @* ABOUT US *@
-            <div class="container-fluid py-5">
+            <div class="container-fluid py-5" id="aboutus">
                 <div class="container py-5">
                     <h1 class="display-4 text-uppercase text-center mb-5">About Us</h1>
                     <div class="owl-carousel testimonial-carousel">
@@ -639,7 +641,12 @@
 
 
 <script>
-    var today = new Date().toISOString().split('T')[0];
+    var today = new Date();
+    var maxDate = new Date(today);
+    maxDate.setDate(today.getDate() + 10);
 
-    document.getElementById("date").setAttribute("min", today);
+    var maxDateString = maxDate.toISOString().split('T')[0];
+
+    document.getElementById("date").setAttribute("min", today.toISOString().split('T')[0]);
+    document.getElementById("date").setAttribute("max", maxDateString);
 </script>
