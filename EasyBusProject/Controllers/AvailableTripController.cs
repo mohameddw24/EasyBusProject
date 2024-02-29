@@ -54,6 +54,7 @@ namespace EasyBusProject.Controllers
             ticket.Time = trip.Time;
             ticket.NumOfAvailSeats = scheduleTrips?.AvailableSeats ?? (int)trip.Bus.Seats;
             ticket.TotalCapacity = (int)trip.Bus.Seats;
+            ticket.Seats = scheduleTrips?.NumOfSeatsReserved ?? "EMPTY";
 
 
             return View(ticket);
@@ -67,11 +68,12 @@ namespace EasyBusProject.Controllers
             var scheduleTrips = _contextSchedule.GetAll().Where(s => s.TripId == id && s.Date == DateOnly.Parse(date)).FirstOrDefault();
             string[] checkedIdsAsStrings = checkBoxViewModel.CheckboxValues.Keys.Select(k => k.ToString()).ToArray();
             string joinedCheckedIds = String.Join(", ", checkedIdsAsStrings);
-
-
             var userSchedule = new UserSchedule();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             userSchedule.UserId = int.Parse(userId);
+            ticket.Price = (int)trip.Price * checkedIdsAsStrings.Length;
+
 
             if (!ModelState.IsValid)
             {
@@ -88,9 +90,9 @@ namespace EasyBusProject.Controllers
                     _contextUserSchedule.Add(userSchedule);
                     scheduleTrips.AvailableSeatsInTrip = (int)trip.Bus.Seats - _contextUserSchedule.GetAvailableSeats(scheduleTrips.Id);
                     _contextSchedule.Update(scheduleTrips);
-                    return Content("scheduleTrips Updated");
+                    //return Content("scheduleTrips Updated");
                 }
-                else 
+                else
                 {
                     var newSchedule = new Schedule
                     {
@@ -99,16 +101,21 @@ namespace EasyBusProject.Controllers
                         AvailableSeatsInTrip = (int)trip.Bus.Seats - ticket.NumOfSeatsOfUser,
                         NumOfSeatsReserved = joinedCheckedIds
                     };
-                    _contextSchedule.Add(newSchedule);  
+                    _contextSchedule.Add(newSchedule);
                     userSchedule.ScheduleId = newSchedule.Id;
                     userSchedule.NumOfSeats = ticket.NumOfSeatsOfUser;
                     userSchedule.SeatsTaken = joinedCheckedIds;
+                    _contextUserSchedule.Add(userSchedule);
                 }
-                _contextUserSchedule.Add(userSchedule);
-                return Content("Done...");
+                ticket.Seats = joinedCheckedIds;
+                return View("TicketDetails", ticket);
             }
         }
 
+        public IActionResult TicketDetails(DetailsOfReservedTripVM ticket)
+        {
+            return View(ticket);
+        }
     }
 }
 

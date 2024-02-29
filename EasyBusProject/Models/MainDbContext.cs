@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using EasyBusProject.ViewModels;
@@ -89,6 +89,7 @@ namespace EasyBus.Models
         public DbSet<EasyBusProject.ViewModels.RegisterUserVM> RegisterUserVM { get; set; } = default!;
         public DbSet<EasyBusProject.ViewModels.LoginUserVM> LoginUserVM { get; set; } = default!;
         public DbSet<EasyBusProject.ViewModels.DetailsOfReservedTripVM> DetailsOfReservedTripVM { get; set; } = default!; 
+        public DbSet<EasyBusProject.ViewModels.TicketViewModel> TicketViewModel { get; set; } = default!;
 
 
     }

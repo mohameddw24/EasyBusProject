@@ -1,0 +1,246 @@
+﻿@model EasyBusProject.ViewModels.DetailsOfReservedTripVM
+
+@{
+    ViewData["Title"] = "TicketDetails";
+}
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        box-sizing: border-box
+    }
+
+    body {
+        background-color: #dadde6;
+        font-family: arial
+    }
+
+    .fl-left {
+        float: left
+    }
+
+    .fl-right {
+        float: right
+    }
+
+    h1 {
+        text-transform: uppercase;
+        font-weight: 900;
+        padding-left: 10px;
+        margin-bottom: 30px
+    }
+
+    .row {
+        overflow: hidden
+    }
+
+    .card {
+        display: table-row;
+        width: 70%;
+        background-color: #fff;
+        color: #989898;
+        margin-bottom: 10px;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        border-radius: 4px;
+        position: relative
+    }
+
+        .card + .card {
+            margin-left: 2%
+        }
+
+    .date {
+        display: table-cell;
+        width: 25%;
+        position: relative;
+        text-align: center;
+        border-right: 2px dashed #dadde6
+    }
+
+        .date:before,
+        .date:after {
+            content: "";
+            display: block;
+            width: 30px;
+            height: 30px;
+            background-color: #DADDE6;
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            z-index: 1;
+            border-radius: 50%
+        }
+
+        .date:after {
+            top: auto;
+            bottom: -15px
+        }
+
+        .date time {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%)
+        }
+
+            .date time span {
+                display: block
+            }
+
+                .date time span:first-child {
+                    color: #2b2b2b;
+                    font-weight: 600;
+                    font-size: 250%
+                }
+
+                .date time span:last-child {
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    margin-top: -10px
+                }
+
+    .card-cont {
+        display: table-cell;
+        width: 75%;
+        font-size: 85%;
+        padding: 10px 10px 30px 50px
+    }
+
+        .card-cont h3 {
+            color: #3C3C3C;
+            font-size: 130%
+        }
+
+
+
+        .card-cont > div {
+            display: table-row
+        }
+
+        .card-cont .even-date i,
+        .card-cont .even-info i,
+        .card-cont .even-date time,
+        .card-cont .even-info p {
+            display: table-cell
+        }
+
+        .card-cont .even-date i,
+        .card-cont .even-info i {
+            padding: 5% 5% 0 0
+        }
+
+        .card-cont .even-info p {
+            padding: 30px 50px 0 0
+        }
+
+        .card-cont .even-date time span {
+            display: block
+        }
+
+        .card-cont a {
+            display: block;
+            text-decoration: none;
+            width: 80px;
+            height: 30px;
+            background-color: #D8DDE0;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 2px;
+            position: absolute;
+            right: 10px;
+            bottom: 10px
+        }
+
+    .row:last-child .card:first-child .card-cont a {
+        background-color: #037FDD
+    }
+
+    .row:last-child .card:last-child .card-cont a {
+        background-color: #F8504C
+    }
+
+    .contentt {
+        display: flex;
+    }
+
+    .bbtn {
+        width: 25%;
+    }
+
+    }
+</style>
+
+<section class="container">
+    <h1>Your Ticket</h1>
+
+    <article class="card fl-left">
+        <div class="contentt">
+            <div class="date">
+                <time>
+                    @Html.DisplayNameFor(model => model.Date)
+                    @Html.DisplayFor(model => model.Date)
+                    @Html.DisplayNameFor(model => model.Time)
+                    @Html.DisplayFor(model => model.Time)
+                </time>
+            </div>
+            <section class="card-cont">
+                <h2> model.UserName </h2>
+                <h3>from  @Html.DisplayFor(model => model.StartFrom) to  @Html.DisplayFor(model => model.Destination)</h3>
+                <div class="even-date">
+                    <span> @Html.DisplayFor(model => model.BusName)</span>
+                    <p>
+                        <span> Number of Seats: </span>
+                        <span> @Html.DisplayFor(model => model.NumOfSeatsOfUser)</span>
+                    </p>
+                </div>
+                <div>
+                    <span>Seats:</span>
+                    <span> @Html.DisplayFor(model => model.Seats)</span>
+                </div>
+                <div class="even-info">
+                    <p>
+                        @Html.DisplayNameFor(model => model.Price)
+                        @Html.DisplayFor(model => model.Price)
+                    </p>
+                </div>
+                
+                <div id="paypal-button-container" class="bbtn"></div>
+            </section>
+    </article>
+
+    </div>
+</section>
+
+<!-- Include PayPal JavaScript SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=ASaMJ0L6Pik2uTtECwmDzOEwVYOS036EJEfau9O1m7J6A6lVyd1Mh2TkiFC4E5dHclVZQiv0NEISgOx7"></script>
+
+<!-- Initialize PayPal Button -->
+<script>
+    paypal.Buttons({
+        createOrder: function (data, actions) {
+            // Set up the transaction details
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: @Model.Price // Set the payment amount
+              }
+                }]
+            });
+        },
+        onApprove: function (data, actions) {
+            // Capture the payment when the user approves the transaction
+            return actions.order.capture().then(function (details) {
+                // Handle successful payment
+                alert('Transaction completed by ' + details.payer.name.given_name);
+                // Redirect or show a success message
+            });
+        }
+    }).render('#paypal-button-container');
+</script>

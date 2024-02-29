@@ -146,7 +146,9 @@ namespace EasyBusProject.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Latitude = table.Column<double>(type: "float", nullable: true),
+                    Longitude = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -367,19 +369,19 @@ namespace EasyBusProject.Migrations
 
             migrationBuilder.InsertData(
                 table: "Station",
-                columns: new[] { "Id", "City", "Name" },
+                columns: new[] { "Id", "City", "Latitude", "Longitude", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Alexandria", "Alexandria" },
-                    { 2, "Beheira", "Beheira" },
-                    { 3, "Bani Suef", "Bani Suef" },
-                    { 4, "Cairo", "Cairo" },
-                    { 5, "Damietta", "Damietta" },
-                    { 6, "Fayoum", "Fayoum" },
-                    { 7, "Giza", "Giza" },
-                    { 8, "Monofiya", "Monofiya" },
-                    { 9, "Port Said", "Port Said" },
-                    { 10, "Tanta", "Tanta" }
+                    { 1, "Alexandria", 30.0444, 31.235700000000001, "Alexandria" },
+                    { 2, "Beheira", 30.474399999999999, 31.035699999999999, "Beheira" },
+                    { 3, "Bani Suef", 29.066127000000002, 31.099385000000002, "Bani Suef" },
+                    { 4, "Cairo", 31.244399999999999, 30.035699999999999, "Cairo" },
+                    { 5, "Damietta", 31.814443000000001, 31.417539000000001, "Damietta" },
+                    { 6, "Fayoum", 30.842849999999999, 29.308402000000001, "Fayoum" },
+                    { 7, "Giza", 31.144400000000001, 30.035699999999999, "Giza" },
+                    { 8, "Monofiya", 30.465928000000002, 30.930579999999999, "Monofiya" },
+                    { 9, "Port Said", 32.314442999999997, 31.217538999999999, "Port Said" },
+                    { 10, "Tanta", 30.777818, 30.991126000000001, "Tanta" }
                 });
 
             migrationBuilder.InsertData(

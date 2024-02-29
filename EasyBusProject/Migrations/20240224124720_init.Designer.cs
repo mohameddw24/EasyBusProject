@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyBusProject.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20240223210828_init")]
+    [Migration("20240224124720_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -169,6 +169,12 @@ namespace EasyBusProject.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<double?>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Longitude")
+                        .HasColumnType("float");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -183,60 +189,80 @@ namespace EasyBusProject.Migrations
                         {
                             Id = 1,
                             City = "Alexandria",
+                            Latitude = 30.0444,
+                            Longitude = 31.235700000000001,
                             Name = "Alexandria"
                         },
                         new
                         {
                             Id = 2,
                             City = "Beheira",
+                            Latitude = 30.474399999999999,
+                            Longitude = 31.035699999999999,
                             Name = "Beheira"
                         },
                         new
                         {
                             Id = 3,
                             City = "Bani Suef",
+                            Latitude = 29.066127000000002,
+                            Longitude = 31.099385000000002,
                             Name = "Bani Suef"
                         },
                         new
                         {
                             Id = 4,
                             City = "Cairo",
+                            Latitude = 31.244399999999999,
+                            Longitude = 30.035699999999999,
                             Name = "Cairo"
                         },
                         new
                         {
                             Id = 5,
                             City = "Damietta",
+                            Latitude = 31.814443000000001,
+                            Longitude = 31.417539000000001,
                             Name = "Damietta"
                         },
                         new
                         {
                             Id = 6,
                             City = "Fayoum",
+                            Latitude = 30.842849999999999,
+                            Longitude = 29.308402000000001,
                             Name = "Fayoum"
                         },
                         new
                         {
                             Id = 7,
                             City = "Giza",
+                            Latitude = 31.144400000000001,
+                            Longitude = 30.035699999999999,
                             Name = "Giza"
                         },
                         new
                         {
                             Id = 8,
                             City = "Monofiya",
+                            Latitude = 30.465928000000002,
+                            Longitude = 30.930579999999999,
                             Name = "Monofiya"
                         },
                         new
                         {
                             Id = 9,
                             City = "Port Said",
+                            Latitude = 32.314442999999997,
+                            Longitude = 31.217538999999999,
                             Name = "Port Said"
                         },
                         new
                         {
                             Id = 10,
                             City = "Tanta",
+                            Latitude = 30.777818,
+                            Longitude = 30.991126000000001,
                             Name = "Tanta"
                         });
                 });
