@@ -1,4 +1,4 @@
-﻿@model EasyBusProject.ViewModels.DetailsOfReservedTripVM
+﻿@model EasyBusProject.Models.Ticket
 
 @{
     ViewData["Title"] = "TicketDetails";
@@ -191,7 +191,7 @@
                 </time>
             </div>
             <section class="card-cont">
-                <h2> model.UserName </h2>
+                <h2> @ViewBag.userName </h2>
                 <h3>from  @Html.DisplayFor(model => model.StartFrom) to  @Html.DisplayFor(model => model.Destination)</h3>
                 <div class="even-date">
                     <span> @Html.DisplayFor(model => model.BusName)</span>

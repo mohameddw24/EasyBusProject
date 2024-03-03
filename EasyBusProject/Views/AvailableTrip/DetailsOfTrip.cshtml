@@ -1,5 +1,4 @@
-﻿@model EasyBusProject.ViewModels.DetailsOfReservedTripVM
-@* @model EasyBusProject.ViewModels.CheckBoxViewModel *@
+﻿@model EasyBusProject.Models.Ticket
 
 
 @{
@@ -92,17 +91,13 @@
                                             seatNumber++;
                                         }
                                     </div>
-                                    @* @if (col != 3 && seatNumber <= totalCapacity)
-                            {
-                            <div class="col-1"></div> <!-- Add space between each two seats -->
-                            } *@
                                 }
                             </div>
                         }
                     </div>
 
                     <div class="text-center mt-5 mb-3">
-                        <input class="btn btn-warning" type="submit" value="Buy Seats" />
+                        <input class="btn btn-warning" type="submit" value="Buy Seats" id="buySeatsButton" />
                     </div>
             </div>
         </div>
@@ -113,12 +108,11 @@
                 @* Pass Hidden Data *@
                 <input type="hidden" name="id" value="@ViewBag.tripId" />
                 <input type="hidden" name="date" value="@Model.Date" />
-                <input type="hidden" name="userName" value="@Model.UserName" />
+                <input type="hidden" name="userName" value="@ViewBag.user" />
                 <input type="hidden" name="busName" value="@Model.BusName" />
                 <input type="hidden" name="price" value="@Model.Price" />
                 <input type="hidden" name="startFrom" value="@Model.StartFrom" />
                 <input type="hidden" name="destination" value="@Model.Destination" />
-                @* <input type="hidden" name="seats" value="@Model.Seats" /> *@
 
 
                 <h3 style="font-weight:bolder">Trip Details</h3>
@@ -174,4 +168,20 @@
 </div>
 </form>
 
+<script>
+    document.getElementById('buySeatsButton').addEventListener('click', function (event) {
+        // Check if at least one seat is selected
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var atLeastOneSeatSelected = Array.from(checkboxes).some(function (checkbox) {
+            return checkbox.checked;
+        });
 
+        // If no seat is selected, prevent the form submission and show a message
+        if (!atLeastOneSeatSelected) {
+            @* event.preventDefault(); *@
+            var errorMessage = 'Please select at least one seat.';
+            // You can replace 'CheckboxValues' with the actual name of your checkbox array in ModelState
+            ModelState.AddModelError("NumOfSeatsOfUser", errorMessage);
+        }
+    });
+</script>

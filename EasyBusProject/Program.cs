@@ -29,6 +29,8 @@ namespace EasyBusProject
             builder.Services.AddScoped<StationRepoServices>();
             builder.Services.AddScoped<UserScheduleRepoServices>();
             builder.Services.AddScoped<ContactUsRepoService>();
+            builder.Services.AddScoped<TicketRepoService>();
+
             builder.Services.AddScoped<IRepository<Station>, StationRepoServices>();
             builder.Services.AddScoped<IRepository<Trip>, TripsRepoServices>();
             builder.Services.AddScoped<IRepository<Schedule>, ScheduleRepoServices>();
@@ -43,17 +45,6 @@ namespace EasyBusProject
             .AddEntityFrameworkStores<MainDbContext>();
 
 
-            //builder.Services.AddAuthentication(options =>
-            //{
-            //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-            //})
-            //.AddCookie()
-            // .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
-            // {
-            //     options.ClientId = builder.Configuration.GetSection("GoogleKeys:ClientId").Value;
-            //     options.ClientSecret = builder.Configuration.GetSection("GoogleKeys:ClientSecret").Value;
-            // });
 
             var app = builder.Build();
 

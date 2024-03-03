@@ -15,8 +15,6 @@ namespace EasyBusProject.ViewModels
         public int Price { get; set; }
         public string StartFrom { get; set; }
         public string Destination { get; set; }
-
-        //[Range(1,5,ErrorMessage = "Choose valid number")]
         public int NumOfSeatsOfUser { get; set; }
         public int TotalCapacity { get; set; }
         public string Seats { get; set; } = " ";

@@ -563,7 +563,7 @@ namespace EasyBusProject.Migrations
                     b.ToTable("ContactUs");
                 });
 
-            modelBuilder.Entity("EasyBusProject.ViewModels.DetailsOfReservedTripVM", b =>
+            modelBuilder.Entity("EasyBusProject.Models.Ticket", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -591,6 +591,10 @@ namespace EasyBusProject.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
+                    b.Property<string>("Seats")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("StartFrom")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -601,66 +605,14 @@ namespace EasyBusProject.Migrations
                     b.Property<int>("TotalCapacity")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("DetailsOfReservedTripVM");
-                });
+                    b.HasIndex("UserId");
 
-            modelBuilder.Entity("EasyBusProject.ViewModels.LoginUserVM", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("RememberMe")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("LoginUserVM");
-                });
-
-            modelBuilder.Entity("EasyBusProject.ViewModels.RegisterUserVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClientName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConfirmPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RegisterUserVM");
+                    b.ToTable("Tickets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -851,6 +803,17 @@ namespace EasyBusProject.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("EasyBusProject.Models.Ticket", b =>
+                {
+                    b.HasOne("EasyBus.Models.User", "User")
+                        .WithMany("Tickets")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
@@ -921,6 +884,8 @@ namespace EasyBusProject.Migrations
 
             modelBuilder.Entity("EasyBus.Models.User", b =>
                 {
+                    b.Navigation("Tickets");
+
                     b.Navigation("UserSchedules");
                 });
 #pragma warning restore 612, 618

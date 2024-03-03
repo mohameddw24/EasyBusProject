@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using EasyBusProject.Models;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace EasyBus.Models
@@ -7,5 +8,6 @@ namespace EasyBus.Models
     {
         public string ClientName { get; set; } = string.Empty;
         public virtual ICollection<UserSchedule>? UserSchedules { get; set; }
+        public virtual ICollection<Ticket>? Tickets { get; set; }
     }
 }

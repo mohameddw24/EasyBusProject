@@ -87,59 +87,6 @@ namespace EasyBusProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DetailsOfReservedTripVM",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateOnly>(type: "date", nullable: false),
-                    Time = table.Column<TimeOnly>(type: "time", nullable: false),
-                    NumOfAvailSeats = table.Column<int>(type: "int", nullable: false),
-                    BusName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<int>(type: "int", nullable: false),
-                    StartFrom = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Destination = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumOfSeatsOfUser = table.Column<int>(type: "int", nullable: false),
-                    TotalCapacity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DetailsOfReservedTripVM", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LoginUserVM",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RememberMe = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LoginUserVM", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RegisterUserVM",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ClientName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ConfirmPassword = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RegisterUserVM", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Station",
                 columns: table => new
                 {
@@ -255,6 +202,35 @@ namespace EasyBusProject.Migrations
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tickets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    Time = table.Column<TimeOnly>(type: "time", nullable: false),
+                    NumOfAvailSeats = table.Column<int>(type: "int", nullable: false),
+                    BusName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    StartFrom = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Destination = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumOfSeatsOfUser = table.Column<int>(type: "int", nullable: false),
+                    TotalCapacity = table.Column<int>(type: "int", nullable: false),
+                    Seats = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tickets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tickets_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -446,6 +422,11 @@ namespace EasyBusProject.Migrations
                 column: "TripId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tickets_UserId",
+                table: "Tickets",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Trip_BusId",
                 table: "Trip",
                 column: "BusId");
@@ -493,13 +474,7 @@ namespace EasyBusProject.Migrations
                 name: "ContactUs");
 
             migrationBuilder.DropTable(
-                name: "DetailsOfReservedTripVM");
-
-            migrationBuilder.DropTable(
-                name: "LoginUserVM");
-
-            migrationBuilder.DropTable(
-                name: "RegisterUserVM");
+                name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "UserSchedules");
