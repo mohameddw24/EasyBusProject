@@ -33,6 +33,7 @@ namespace EasyBus.Models
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
 
 
+
             modelBuilder.Entity<Station>().HasData(
                 new Station { Id = 1, Name = "Alexandria", City = "Alexandria", Latitude = 30.0444, Longitude = 31.2357 },
                 new Station { Id = 2, Name = "Beheira", City = "Beheira", Latitude = 30.4744, Longitude = 31.0357 },

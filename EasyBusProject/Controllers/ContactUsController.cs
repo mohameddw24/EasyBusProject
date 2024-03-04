@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EasyBus.Models;
 using EasyBusProject.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EasyBusProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class ContactUsController : Controller
     {
         private readonly MainDbContext _context;

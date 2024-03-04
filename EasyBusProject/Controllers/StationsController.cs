@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EasyBus.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EasyBusProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class StationsController : Controller
     {
         private readonly MainDbContext _context;
