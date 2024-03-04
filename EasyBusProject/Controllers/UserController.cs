@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 
 namespace EasyBusProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
 
@@ -20,7 +21,7 @@ namespace EasyBusProject.Controllers
             RoleManager = roleManager;
         }
 
-        [Authorize(Roles = "Admin")]
+        
         public async Task<IActionResult> Index()
         {
             IEnumerable<UserRoleVM> users = UserManager.GetUsersInRoleAsync("User").Result.Select(User =>
