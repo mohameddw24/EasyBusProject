@@ -117,7 +117,7 @@
                     <option value=@item.Id>@item.Name</option>
                 }
             </select>
-            <input  class="date" type="date" id="date" name="date"/>
+            <input required class="date" type="date" id="date" name="date"/>
             
             @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
             {
