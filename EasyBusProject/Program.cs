@@ -46,6 +46,19 @@ namespace EasyBusProject
 
 
 
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            })
+            .AddCookie()
+             .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+             {
+                 options.ClientId = builder.Configuration.GetSection("GoogleKeys:ClientId").Value;
+                 options.ClientSecret = builder.Configuration.GetSection("GoogleKeys:ClientSecret").Value;
+             });
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

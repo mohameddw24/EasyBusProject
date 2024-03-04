@@ -2,6 +2,7 @@
 using EasyBusProject.Models;
 using EasyBusProject.RepoServices;
 using EasyBusProject.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -25,6 +26,7 @@ namespace EasyBusProject.Controllers
             _contextTicket = ticketRepoService;
             _userManager = userManager;
         }
+
 
         public IActionResult Index(int pickUp, int dropOff, DateOnly date)
         {
