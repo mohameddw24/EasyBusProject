@@ -21,41 +21,40 @@
     }
 </style>
 
-
-<p>
-    <a  class="create"asp-action="Create">Create New</a>
-</p>
 <form method="post">
 
+    <div class="container mt-3">
+        <table class="table table-hover">
+            <thead>
+                <tr class="headd">
+                    <th scope="col">  @Html.DisplayNameFor(model => model.UserName)</th>
+                    <th scope="col"> @Html.DisplayNameFor(model => model.IsAdmin)</th>
+                    <th scope="col"> </th>
+                    <th scope="col"> </th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
 
 
 
-      <table class="table table-hover">
-      <thead>
-        <tr class="headd">
-          <th scope="col">  @Html.DisplayNameFor(model => model.UserName)</th>
-          <th scope="col"> @Html.DisplayNameFor(model => model.IsAdmin)</th>
+                    <tr>
+                        <th scope="row"> @Html.DisplayFor(modelItem => item.UserName)</th>
+                        <td><input type="checkbox" name="userRoleDictVM.UserIdList" value="@item?.Id" /></td>
+                        <td>  <input hidden data-val="true" name="userRole[@item.Id]" type="checkbox" value="@item?.IsAdmin" /></td>
+                        <td> <input type="hidden" name="Id" class="Id" value="@item?.Id" /></td>
+                    </tr>
 
-        </tr>
-      </thead>
-       <tbody>
-  
-    @foreach (var item in Model) {
-         
-               
-     
-        <tr>
-          <th scope="row"> @Html.DisplayFor(modelItem => item.UserName)</th>
-          <td><input type="checkbox" name="userRoleDictVM.UserIdList" value="@item?.Id" /></td>
-          <td>  <input hidden data-val="true" name="userRole[@item.Id]" type="checkbox" value="@item?.IsAdmin" /></td>
-          <td> <input type="hidden" name="Id"  class="Id" value="@item?.Id" /></td>
-        </tr>
-        
-    }
-        </tbody>
-    </table>
+                }
+            </tbody>
+        </table>
+        <input class="btn btn-warning" type="submit" value="Change" />
+    </div>
+      
 
-    <input class="btn btn-warning" type="submit" value="Change" />
    
 </form>
 
