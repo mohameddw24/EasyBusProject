@@ -117,10 +117,16 @@
                     <option value=@item.Id>@item.Name</option>
                 }
             </select>
-
             <input  class="date" type="date" id="date" name="date"/>
-
-            <input type="submit" value="Find Trips" class="btn bbtn" style="background-color:#FEC91B;margin-bottom:3px" />
+            
+            @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+                <input type="submit" value="Find Trips" class="btn bbtn" style="background-color:#FEC91B;margin-bottom:3px" />
+            }
+            else
+            {
+                <input disabled type="submit" value="Find Trips" class="btn bbtn" style="background-color:#FEC91B;margin-bottom:3px" />
+            }
         </form>
 
     </div>
