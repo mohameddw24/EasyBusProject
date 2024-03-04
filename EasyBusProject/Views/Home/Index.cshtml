@@ -84,6 +84,13 @@
         .text-primary {
             color: #FEC91B !important;
         }
+        .selectdropoff{
+            /*  background-color:#FEC91B; */
+             
+        }
+        .bbtn{
+            color:black;
+        }
 
     </style>
 </head>
@@ -103,7 +110,7 @@
                 }
             </select>
 
-            <select required class="form-select" aria-label="Default select example" name="dropOff">
+            <select  class="form-select  selectdropoff" aria-label="Default select example" name="dropOff">
                 <option selected>To</option>
                 @foreach (var item in stations)
                 {
@@ -111,9 +118,9 @@
                 }
             </select>
 
-            <input required class="date" type="date" id="date" name="date"/>
+            <input  class="date" type="date" id="date" name="date"/>
 
-            <input type="submit" value="Find Trips" class="btn" style="background-color:#FEC91B;margin-bottom:3px" />
+            <input type="submit" value="Find Trips" class="btn bbtn" style="background-color:#FEC91B;margin-bottom:3px" />
         </form>
 
     </div>

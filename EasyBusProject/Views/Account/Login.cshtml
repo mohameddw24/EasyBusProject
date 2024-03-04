@@ -190,7 +190,7 @@ input[type="submit"] {
 }
 .login-container {
     position: relative;
-    z-index: 1; /* Ensure the login form appears below the navigation bar */
+    z-index: 99; /* Ensure the login form appears below the navigation bar */
     width:100%;
 }
 .assist{
@@ -200,11 +200,11 @@ input[type="submit"] {
  </style>
 
 
-<h1>Login</h1>
+@* <h1>Login</h1> *@
 
-<hr />
+@* <hr /> *@
 <div class="row">
-    <div class="col-md-4">
+   @*  <div class="col-md-4">
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -234,7 +234,7 @@ input[type="submit"] {
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to List</a> *@
 </div>
 <div class=" login-container">
     <!-- Your login form HTML here -->
@@ -285,9 +285,7 @@ input[type="submit"] {
             <div class="login" style="color: black;">Or login with</div>
 
 
-            <form asp-action="GoogleLogin">
-            <input class="gbtn btn" type="submit"  value="Google" />
-        </form>
+           
 
          <div class="signup"><span class="dont">Don't have account?</span>
                   <a asp-action="Register" asp-controller="Account"><span class="aa">Register Now</span> </a>
@@ -295,6 +293,9 @@ input[type="submit"] {
             </div>
 
            
+        </form>
+         <form asp-action="GoogleLogin">
+            <input class="gbtn btn" type="submit"  value="Login Using Google" />
         </form>
     </div>
 </div>   
